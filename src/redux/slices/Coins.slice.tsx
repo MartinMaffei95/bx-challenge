@@ -26,27 +26,33 @@ export const coinsSlice = createSlice({
     selectPage: (state, action: PayloadAction<number>) => {
       state.loading = true;
 
+      //Setting the actual page
       state.actual_page = action.payload;
+      // Results on actual page
       state.results_on_page = getPagination(
         state.coins,
         state.per_page,
         state.actual_page
       );
+
       state.loading = false;
     },
     getCoins: (state, action: PayloadAction<string>) => {
-      console.log('GET ACTION==>>>', action);
       state.loading = true;
     },
     getCoinsSuccess: (state, action: PayloadAction<APICoin[]>) => {
       console.log('SUCCESS ACTION==>>>', action);
+      // Adapting the results from using on app
+
       const adaptedCoins = adaptCoins(action.payload);
       state.coins = adaptedCoins;
+      // Results on actual page
       state.results_on_page = getPagination(
         adaptedCoins,
         state.per_page,
         state.actual_page
       );
+      // Calulating the number of pages
       state.total_pages = getNumberOfPages(state.coins, state.per_page);
       state.loading = false;
     },
