@@ -23,7 +23,6 @@ const ChartComponent = ({ coinPrices, barColor, linecolor }: Props) => {
   );
 
   const labels = coinPrices;
-  console.log(coinPrices);
   const data = {
     labels,
     datasets: [

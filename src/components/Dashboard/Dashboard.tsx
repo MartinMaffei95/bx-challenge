@@ -3,19 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCoins } from '../../redux/slices/Coins.slice';
 import { ReduxState } from '../../models';
 import Card from '../Card/Card';
+import Pagination from '../Pagination/Pagination';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { loading, coins } = useSelector((state: ReduxState) => state.coins);
+  const { loading, results_on_page } = useSelector(
+    (state: ReduxState) => state.coins
+  );
   const getData = () => {
     dispatch(
       getCoins(
-        '/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=11&sparkline=true&price_change_percentage=1h&locale=en'
+        '/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h&locale=en'
       )
     );
   };
   return (
-    <div>
+    <div className="bg-slate-900">
+      <Pagination />
       Dashboard
       <button
         disabled={loading}
@@ -24,7 +28,11 @@ const Dashboard = () => {
       >
         GETTTT
       </button>
-      {coins ? coins.map((coin) => <Card coin={coin} />) : null}
+      <main className="flex flex-wrap justify-around">
+        {results_on_page
+          ? results_on_page.map((coin) => <Card coin={coin} />)
+          : null}
+      </main>
     </div>
   );
 };
