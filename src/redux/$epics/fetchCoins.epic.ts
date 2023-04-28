@@ -3,19 +3,46 @@ import {
   getCoins,
   getCoinsError,
   getCoinsSuccess,
+  setOurCoinValues,
 } from '../slices/Coins.slice';
-import { map, mergeMap, of, catchError, delay } from 'rxjs';
+import { mergeMap, of, catchError, forkJoin, from } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
+import { APPCoin } from '../../models';
+import { Errors } from '../../models/ErrorCodes.enum';
 
 export const fetchCoinEpic = (action$: any) =>
   action$.pipe(
     ofType(getCoins.type),
     mergeMap(({ payload }) =>
-      ajax.getJSON(`${import.meta.env.VITE_CRYPTO_URI}${payload}`).pipe(
-        delay(2000),
-        map((res: any) => getCoinsSuccess(res)),
-        catchError((error) => of(getCoinsError('ocurrion un error')))
+      forkJoin(
+        ajax.getJSON(`${import.meta.env.VITE_CRYPTO_URI}${payload}`).pipe(
+          mergeMap((coins) => of(getCoinsSuccess(coins as APPCoin[]))),
+          catchError(() =>
+            of(
+              getCoinsError({ reqTo: 'COINS', error: Errors['GENERIC_ERROR'] })
+            )
+          )
+        ),
+        from(
+          fetch(
+            `http://www.randomnumberapi.com/api/v1.0/randomredditnumber?min=1000&max=10000&count=100`
+          ).then((response) => response.json())
+        ).pipe(
+          mergeMap((randomNumbers) => of(setOurCoinValues(randomNumbers))),
+          catchError(() =>
+            of(
+              getCoinsError({
+                reqTo: 'RANDOMNUMBER',
+                error: Errors['GENERIC_ERROR'],
+              })
+            )
+          )
+        )
+      ).pipe(
+        mergeMap((actions) => actions),
+        catchError(() =>
+          of(getCoinsError({ reqTo: 'BOTH', error: Errors['GENERIC_ERROR'] }))
+        )
       )
     )
   );
-///coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en

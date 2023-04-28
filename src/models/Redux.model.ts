@@ -1,13 +1,15 @@
-import { APPCoin } from '.';
+import { APPCoin, Errors } from '.';
 
 export interface ReduxState {
   coins: CoinsState;
+  app: AppState;
 }
 
 export interface CoinsState {
   //coinsState
   coins: APPCoin[];
   coin_selected: APPCoin;
+  our_coin: APPCoin;
 
   //pagesSettings
   total_pages: number;
@@ -17,9 +19,13 @@ export interface CoinsState {
 
   //loginState
   loading: boolean;
+
+  //errorStates
+  coins_error: Errors | null;
+  our_coin_error: Errors | null;
 }
 export interface AppState {
   loading: boolean;
-  dark_theme: boolean;
+  light_theme: boolean;
   dashboard_style: 'GRID' | 'ROWS';
 }

@@ -31,7 +31,6 @@ export const getNumberOfPages = (
   const howItems: number = all_results.length;
 
   const divi = howItems / per_page; // 50/10 = 5 | 25/10 = 3 |39 /10 = 4
-  console.log(howItems, per_page, divi);
   const res = divi - Math.floor(divi) !== 0;
   if (res) {
     console.log(divi);

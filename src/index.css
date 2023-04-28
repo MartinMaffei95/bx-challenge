@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,4 +10,20 @@
 
 .last_changes-container div {
   @apply p-2 flex justify-center items-center;
+}
+
+.data-displayer {
+  @apply p-2 my-2;
+}
+
+.data-displayer h3 {
+  @apply text-2xl font-bold;
+}
+
+.data-displayer p {
+  @apply text-md pl-2 my-1;
+}
+
+.little-data {
+  @apply text-xs hidden;
 }

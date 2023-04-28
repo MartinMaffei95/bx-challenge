@@ -9,7 +9,7 @@ const epicMiddleware = createEpicMiddleware();
 export const store = configureStore({
   reducer: {
     coins: CoinsSlice,
-    appSettings: appSlice,
+    app: appSlice,
   },
   middleware: [epicMiddleware],
 });
