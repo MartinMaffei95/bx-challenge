@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { switchTheme } from '../../redux/slices/App.slice';
 import { ReduxState } from '../../models';
 import LogoSvg from '../LogoSvg';
+import LogoLetter from '../Logo_letter';
 import { useResize } from '../../Hooks/useResize';
 const Header = () => {
   const { isPhone } = useResize();
@@ -16,18 +17,15 @@ const Header = () => {
         <LogoSvg className="h-14 w-full" />
       </div>
       {isPhone ? null : <SearchBar />}
-      <div className="basis-1/12 justify-around items-center flex flex-col">
-        Modo
-        <div className="flex  justify-around items-center gap-2">
-          <BsFillMoonStarsFill className="text-2xl" />
-          <Switch
-            action={() => {
-              dispatch(switchTheme(!light_theme));
-            }}
-            checked={light_theme ? true : false}
-          />
-          <BsFillSunFill className="text-2xl" />
-        </div>
+      <div className="basis-1/12 flex justify-around items-center">
+        <BsFillMoonStarsFill className="text-2xl" />
+        <Switch
+          action={() => {
+            dispatch(switchTheme(!light_theme));
+          }}
+          checked={light_theme ? true : false}
+        />
+        <BsFillSunFill className="text-2xl" />
       </div>
     </header>
   );

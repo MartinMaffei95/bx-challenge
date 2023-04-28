@@ -6,6 +6,8 @@ import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
 import { useResize } from '../../Hooks/useResize';
+import Error404 from '../ErrorFetch';
+import RetryBtn from '../RetryComponents/RetryBtn';
 
 const Dashboard = () => {
   const { isPhone } = useResize();
@@ -22,7 +24,7 @@ const Dashboard = () => {
       )}
 
       <Pagination />
-      <main className="flex flex-wrap w-full h-full justify-around p-4 gap-4 dark:text-neutral-100">
+      <main className="flex flex-wrap w-full h-full justify-around p-4 gap-4 dark:text-neutral-100 ">
         {our_coin?.name ? (
           <div className="flex flex-col h-full w-full  sm:flex-row gap-2">
             <div className=" flex  w-full flex-col sm:basis-1/3 mt-4">
@@ -47,7 +49,7 @@ const Dashboard = () => {
               coin={our_coin}
             />
           </div>
-        ) : our_coin_error ? (
+        ) : our_coin_error && !coins_error ? (
           <div>
             Ocurrio un error mientras obteniamos los datos de nuestra moneda{' '}
             {':('}
@@ -57,11 +59,12 @@ const Dashboard = () => {
         {results_on_page.length > 0 ? (
           results_on_page?.map((coin) => <Card key={coin?.id} coin={coin} />)
         ) : coins_error ? (
-          <div className="bg-red-600 w-full h-full">
-            Ocurrio un error mientras obteniamos los datos {':('}
-          </div>
+          <Error404 />
         ) : (
-          <div>No tenemos informacion para mostrar</div>
+          <div>
+            <p>No tenemos informacion para mostrar</p>
+            <RetryBtn />
+          </div>
         )}
       </main>
     </div>
