@@ -40,15 +40,14 @@ const CoinInformation = ({ coin }: { coin: APPCoin }) => {
         <ColoredStat
           title={'Market cap :'}
           value={coin?.market_cap_change_24h}
+          decorator={<ExtraData text=" *(last 24hs)" />}
         />
-        <ExtraData text="(last 24hs)" />
 
         <ColoredStat
           title={'Market cap% :'}
           value={coin?.market_cap_change_percentage_24h}
-          decorator="% *"
+          decorator={<ExtraData text="% *(last 24hs)" />}
         />
-        <ExtraData text="(last 24hs)" />
       </DataDisplayer>
       <DataDisplayer>
         <h3>Price Change in last 24hours</h3>
@@ -63,9 +62,8 @@ const CoinInformation = ({ coin }: { coin: APPCoin }) => {
         <ColoredStat
           title={'Price Change% :'}
           value={coin?.price_change_percentage_1h_in_currency}
-          decorator="% *"
+          decorator={<ExtraData text="% *(last hour)" />}
         />
-        <ExtraData text="(last hour)" />
         <div className="flex justify-center items-center">
           <BiLineChart />
           <ColoredStat title={'High peak :'} value={coin?.high_24h} />

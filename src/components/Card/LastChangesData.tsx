@@ -47,7 +47,7 @@ export const ColoredStat = ({
 }: {
   title: string;
   value: number;
-  decorator?: string;
+  decorator?: React.ReactNode;
   extraStyle?: string;
 }) => {
   return (

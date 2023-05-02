@@ -1,26 +1,9 @@
-import {
-  Chart as ChartJS,
-  LinearScale,
-  CategoryScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip,
-} from 'chart.js';
+import { Chart as ChartJS, registerables } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
 type Props = { coinPrices: number[]; barColor: string; linecolor: string };
 const ChartComponent = ({ coinPrices, barColor, linecolor }: Props) => {
-  ChartJS.register(
-    LinearScale,
-    CategoryScale,
-    BarElement,
-    PointElement,
-    LineElement,
-    Legend,
-    Tooltip
-  );
+  ChartJS.register(...registerables);
 
   const labels = coinPrices;
   const data = {

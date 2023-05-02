@@ -25,5 +25,5 @@
 }
 
 .little-data {
-  @apply text-xs hidden;
+  @apply text-xs;
 }
