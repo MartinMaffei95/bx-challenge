@@ -9,8 +9,18 @@ width="100%"
 ## How run.
 
 1. Execute `npm install`
-2. Execute `npm run dev` for development or `npm run start` to build and execute locally on port 4200
-3. Happy hacking
+2. Configure the .env file - explication on next section -
+3. Execute `npm run dev` for development or `npm run start` to build and execute locally on port 4200
+4. Happy hacking
+
+## .env file.
+
+You will need configure
+
+```js
+// API uri
+VITE_CRYPTO_URI = 'https://api.coingecko.com/api/v3';
+```
 
 ## Consigna
 
