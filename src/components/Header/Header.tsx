@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { switchTheme } from '../../redux/slices/App.slice';
 import { ReduxState } from '../../models';
 import LogoSvg from '../LogoSvg';
-import LogoLetter from '../Logo_letter';
 import { useResize } from '../../Hooks/useResize';
 const Header = () => {
   const { isPhone } = useResize();

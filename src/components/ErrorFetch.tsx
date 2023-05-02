@@ -1,4 +1,3 @@
-import { AiOutlineReload } from 'react-icons/ai';
 import RetryBtn from './RetryComponents/RetryBtn';
 
 const ErrorFetch = () => {
